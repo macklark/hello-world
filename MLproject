@@ -1,0 +1,8 @@
+name: mlflow-demo
+entry_points:
+  main:
+    parameters:
+      epochs: { type: int, default: 6 }
+      batch_size: { type: int, default: 128 }
+      experimentId: { type: float, default: 0.3 }
+    command: "python train.py {epochs} {batch_size} {experimentId}"
