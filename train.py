@@ -13,12 +13,12 @@ import sys
 
 mlflow.set_tracking_uri("http://ec2-3-138-116-153.us-east-2.compute.amazonaws.com:5000/")
 
-# epochs = int(sys.argv[1])
-# batch_size = int(sys.argv[2])
-# experimentId = float(sys.argv[3])
+epochs = int(sys.argv[1])
+batch_size = int(sys.argv[2])
+experimentId = float(sys.argv[3])
 
-# experiment_id = mlflow.create_experiment('mnist_experiment_{}'.format(experimentId))
-experiment_id = mlflow.create_experiment('mnist_experiment_0.2')
+experiment_id = mlflow.create_experiment('mnist_experiment_{}'.format(experimentId))
+# experiment_id = mlflow.create_experiment('mnist_experiment_0.2')
 
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 train_images = train_images.reshape((60000, 28*28))
@@ -34,7 +34,7 @@ with mlflow.start_run(experiment_id=experiment_id):
 
     model.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(train_images, train_labels, epochs=6, batch_size=128)
+    model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size)
 
     train_loss, train_accu = model.evaluate(train_images, train_labels)
     test_loss, test_accu = model.evaluate(test_images, test_labels)
